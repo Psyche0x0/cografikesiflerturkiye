@@ -6,7 +6,7 @@
   <title>COĞRAFİ KEŞİFLER TÜRKİYE</title>
   <style>
     :root{
-      --bg-start: #4a0e16; /* bordo */
+      --bg-start: #4a0e16; 
       --bg-mid: #2b0a0e;
       --bg-end: #1a1a1d;
       --card:#2a2c31;
@@ -63,7 +63,6 @@
       padding:0 16px 80px 16px;
     }
 
-    /* Home */
     .home {
       display:flex;
       flex-direction:column;
@@ -80,7 +79,6 @@
     }
     .home .actions { display:flex; gap:16px; margin-top:18px; }
 
-    /* Rules */
     #rulesView {
       display:none;
       background: rgba(255,255,255,0.03);
@@ -101,7 +99,6 @@
       border-radius:8px;
     }
 
-    /* Answers (cards) */
     #answersView { display:none; }
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .card{
@@ -121,7 +118,6 @@
     }
     .card:hover{ transform:translateY(-6px); box-shadow:0 14px 30px rgba(0,0,0,0.5); color:#fff; }
 
-    /* QA view */
     .qa{display:none;background:var(--card);border-radius:12px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.45); color:var(--muted-light); margin-top:18px}
     .qa h2{margin:0 0 12px 0;color:#fff}
     .qa p{margin:0 0 18px 0;color:var(--muted-light)}
@@ -129,7 +125,6 @@
 
     footer{max-width:1100px;margin:28px auto;color:var(--muted-light);padding:0 16px; text-align:center; font-size:13px}
 
-    /* Responsive */
     @media (max-width:880px){ .grid{grid-template-columns:repeat(2,1fr)} .card{padding:20px;font-size:18px} }
     @media (max-width:420px){ .grid{grid-template-columns:repeat(1,1fr)} }
   </style>
@@ -145,7 +140,7 @@
   </header>
 
   <main class="container">
-    <!-- HOME -->
+
     <section id="homeView" class="home">
       <div class="big">COĞRAFİ KEŞİFLER<br>TÜRKİYE</div>
       <div class="actions">
@@ -157,7 +152,7 @@
       </p>
     </section>
 
-    <!-- RULES -->
+    
     <section id="rulesView" aria-hidden="true">
       <h2>Coğrafi Keşifler Türkiye Oyunu – Kural Kitapçığı</h2>
       <pre>
@@ -243,10 +238,8 @@ En yüksek puana sahip oyuncu oyunu kazanır.
       </div>
     </section>
 
-    <!-- ANSWERS / CARDS -->
     <section id="answersView" aria-hidden="true">
-      <div id="gridView" class="grid" aria-label="Kart Listesi">
-        <!-- JS ile eklenecek -->
+      <div id="gridView" class="grid" aria-label="Kart Listesi">   
       </div>
 
       <section id="qaView" class="qa" aria-hidden="true">
@@ -265,7 +258,6 @@ En yüksek puana sahip oyuncu oyunu kazanır.
   </footer>
 
   <script>
-    /* ---------- QA veri kümesi (kullanıcının verdiği içerik entegre edildi) ---------- */
     const qaData = Array.from({length:99}, (_, i) => {
       const id = i + 1;
   if(id === 1) return { id, q: "Türkiye’nin en yüksek dağı hangi dağdır?", a: " Ağrı Dağı – Türkiye’nin en yüksek dağı olup volkanik kökenlidir. Sert iklimi ve buzul örtüsüyle dikkat çeker." };
@@ -371,7 +363,6 @@ En yüksek puana sahip oyuncu oyunu kazanır.
       return { id, q: "", a: "" };
     });
 
-    /* ---------- Görüntü kontrolü: Home / Rules / Answers ---------- */
     const homeView = document.getElementById('homeView');
     const rulesView = document.getElementById('rulesView');
     const answersView = document.getElementById('answersView');
@@ -407,7 +398,6 @@ En yüksek puana sahip oyuncu oyunu kazanır.
       window.scrollTo({top:0,behavior:'smooth'});
     }
 
-    // Nav butonlar
     document.getElementById('navHome').addEventListener('click', showHome);
     document.getElementById('navRules').addEventListener('click', showRules);
     document.getElementById('navAnswers').addEventListener('click', showAnswers);
@@ -415,7 +405,6 @@ En yüksek puana sahip oyuncu oyunu kazanır.
     document.getElementById('homeAnswersBtn').addEventListener('click', showAnswers);
     document.getElementById('rulesBack').addEventListener('click', showHome);
 
-    /* ---------- Kartlar + QA gösterimi (aynı mantıkla) ---------- */
     const grid = document.getElementById('gridView');
     const questionTitle = document.getElementById('questionTitle');
     const questionText = document.getElementById('questionText');
@@ -443,7 +432,6 @@ En yüksek puana sahip oyuncu oyunu kazanır.
       questionTitle.textContent = `Soru ${item.id}`;
       questionText.textContent = item.q || "Soru eklenmemiş.";
       answerText.textContent = item.a || "Cevap eklenmemiş.";
-      // göster
       answersView.querySelector('#gridView').style.display = 'none';
       qaView.style.display = 'block';
       qaView.setAttribute('aria-hidden','false');
@@ -459,9 +447,9 @@ En yüksek puana sahip oyuncu oyunu kazanır.
 
     backBtn.addEventListener('click',(e)=>{e.preventDefault(); showGrid();});
 
-    // initial render
     renderGrid();
     showHome();
   </script>
 </body>
 </html>
+
