@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>COĞRAFİ KEŞİFLER TÜRKİYE</title>
+  <style>
+    :root{
+      --bg-start: #4a0e16; /* bordo */
+      --bg-mid: #2b0a0e;
+      --bg-end: #1a1a1d;
+      --card:#2a2c31;
+      --accent:#6aa6c9;
+      --muted:#e4d0d6;
+      --muted-light:#f5f5f5;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background:linear-gradient(180deg,var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
+      color:var(--muted-light);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      min-height:100vh;
+    }
+
+    header{
+      padding:28px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      max-width:1100px;
+      margin:0 auto;
+    }
+    header h1{
+      margin:0;
+      font-size:22px;
+      letter-spacing:0.6px;
+    }
+
+    .nav {
+      display:flex;
+      gap:12px;
+    }
+    .btn {
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.12);
+      color:var(--muted-light);
+      padding:10px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+    }
+    .btn.primary {
+      background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border:1px solid rgba(255,255,255,0.12);
+    }
+    main.container{
+      max-width:1100px;
+      margin:28px auto;
+      padding:0 16px 80px 16px;
+    }
+
+    /* Home */
+    .home {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
+      margin-top:60px;
+    }
+    .home .big {
+      font-size:48px;
+      font-weight:800;
+      text-align:center;
+      color: #fff;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+    .home .actions { display:flex; gap:16px; margin-top:18px; }
+
+    /* Rules */
+    #rulesView {
+      display:none;
+      background: rgba(255,255,255,0.03);
+      padding:22px;
+      border-radius:12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    #rulesView h2 { margin-top:0; color: #fff; }
+    #rulesView pre {
+      white-space:pre-wrap;
+      font-family: inherit;
+      color: #f3f3f3;
+      font-size:15px;
+      line-height:1.6;
+      margin:8px 0 12px 0;
+      background: rgba(0,0,0,0.15);
+      padding:12px;
+      border-radius:8px;
+    }
+
+    /* Answers (cards) */
+    #answersView { display:none; }
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:28px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:22px;
+      color:var(--muted);
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(0,0,0,0.35);
+      transition:transform .12s ease,box-shadow .12s ease, background .12s ease;
+      min-height:110px;
+    }
+    .card:hover{ transform:translateY(-6px); box-shadow:0 14px 30px rgba(0,0,0,0.5); color:#fff; }
+
+    /* QA view */
+    .qa{display:none;background:var(--card);border-radius:12px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.45); color:var(--muted-light); margin-top:18px}
+    .qa h2{margin:0 0 12px 0;color:#fff}
+    .qa p{margin:0 0 18px 0;color:var(--muted-light)}
+    .qa h3{margin:8px 0 6px 0;color:#fff}
+
+    footer{max-width:1100px;margin:28px auto;color:var(--muted-light);padding:0 16px; text-align:center; font-size:13px}
+
+    /* Responsive */
+    @media (max-width:880px){ .grid{grid-template-columns:repeat(2,1fr)} .card{padding:20px;font-size:18px} }
+    @media (max-width:420px){ .grid{grid-template-columns:repeat(1,1fr)} }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>COĞRAFİ KEŞİFLER TÜRKİYE</h1>
+    <div class="nav" role="navigation" aria-label="Ana menü">
+      <button class="btn" id="navHome">Anasayfa</button>
+      <button class="btn" id="navRules">Kurallar</button>
+      <button class="btn primary" id="navAnswers">Cevaplar</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HOME -->
+    <section id="homeView" class="home">
+      <div class="big">COĞRAFİ KEŞİFLER<br>TÜRKİYE</div>
+      <div class="actions">
+        <button class="btn" id="homeRulesBtn">Kurallar</button>
+        <button class="btn primary" id="homeAnswersBtn">Cevaplar</button>
+      </div>
+      <p style="max-width:760px;text-align:center;color:rgba(255,255,255,0.85);margin-top:12px">
+        Oyuna başlamadan önce <strong>Kurallar</strong> sayfasını okuyun. <strong>Cevaplar</strong> sayfasında 100 adet kart ve cevapları bulunur; her karta tıklayınca soru ve cevabı görürsünüz.
+      </p>
+    </section>
+
+    <!-- RULES -->
+    <section id="rulesView" aria-hidden="true">
+      <h2>Coğrafi Keşifler Türkiye Oyunu – Kural Kitapçığı</h2>
+      <pre>
+COĞRAFİ KEŞİFLER TÜRKİYE OYUNU KURAL KİTAPÇIĞI
+1. <strong>OYUN İÇERİĞİ</strong>
+1 adet Türkiye Haritası şeklinde oyun tahtası
+1 adet özeltasarım zar (6 yüz)
+İleri
+Geri
+Pas
+Normal Kart
+Özel Kart
+Alternatif Rota
+Normal Kartlar (kolay sorular)
+Özel Kartlar (zor sorular – 9 adet)
+Oyuncu piyonları
+Yapboz parçaları (9 adet – Atatürk resmi)
+
+2. <strong>OYUNUN BAŞLANGICI</strong>
+1. Her oyuncu bir piyon seçer.
+2. Tüm oyuncular başlangıç noktasına yerleştirilir.
+3. Kart desteleri karıştırılarak masaya yerleştirilir.
+4. İlk oyuncu zar atarak oyunu başlatır.
+
+3. <strong>ZAR YÜZLERİ VE ANLAMLARI</strong>
+Zar 6 farklı renkten oluşmaktadır ve her renk farklı bir hamleyi temsil eder.
+1. İleri (Mavi Yüz)
+Oyuncu piyonunu bir (1) kadar ileritaşır.
+2. Geri (Kırmızı Yüz)
+Oyuncu piyonunu bir (1) kadar geri götürür.
+3. Pas (Gri Yüz)
+Oyuncu bu tur hamle yapmadan bekler.
+4. Normal Kart(Yeşil Yüz)
+Oyuncu bir Normal Kart çeker:
+Doğru cevap: +1 puan
+Yanlış cevap: –1 puan
+5. Özel Kart(Altın Sarısı Yüz)
+Oyuncu bir Özel Kart çeker:
+Doğru cevap: Yapbozun 1 parçası
+Yanlış cevap: Ceza yok
+6. Doğal Afet(Turuncu Yüz)
+Bu yüz geldiğinde oyuncu bulunduğu bölgenin doğal afetine göre etkilenir. Harita üzerinde afet
+ikonları bulunur.
+Doğal Afet Etkileri
+Marmara → Deprem: 1 tur bekle .
+Karadeniz → Heyelan: Oyuncu aynı ilde kalır,
+Doğu Anadolu→ Çığ: 2 adım geri gider.
+Ege & Akdeniz Ormanlık Alanları → Orman Yangını: Normal kart çek (yanlışsa puan kaybı
+olur).
+
+4. <strong>KART TÜRLERİ</strong>
+Normal Kartlar
+Kolay seviye kültürel ve coğrafi bilgiler içerir.
+Her kartta tek soru bulunur.
+Amaç bilgi birikimini artırmaktır.
+Özel Kartlar
+Zor seviye sorulardan oluşur.
+Her doğru cevap, Atatürk yapbozunun bir parçasını verir.
+Toplam 9 adet özel kart bulunmaktadır.
+Alternatif Rota Kartları
+Oyuncunun harita üzerinde farklı yollar seçmesini sağlar.
+Rotalar ilerleyişi hızlandırabilir veya yavaşlatabilir.
+
+5. <strong>PUANLAMA SİSTEMİ</strong>
+Normal Kart doğru cevap: +1 puan
+Normal Kart yanlış cevap: –1 puan
+Özel Kart doğru cevap: 1 yapboz parçası
+Özel Kart yanlış cevap: Ceza yok
+Doğal Afet: Bölgeye göre değişir (ilerleme, geri gitme, kart çekme vb.)
+
+6. <strong>OYUNUN BİTİŞİ VE KAZANMA KOŞULLARI</strong>
+1. Yapboz Tamamlanırsa
+Bir oyuncu Özel Kartlardan gelen 9 yapboz parçasınıtamamladıysa oyunu otomatik olarak
+kazanır.
+2. Haritanın Sonuna Ulaşılırsa
+Oyuncular haritanın son iline ulaştıktan sonra puanlar sayılır.
+En yüksek puana sahip oyuncu oyunu kazanır.                                          
+
+<strong>Keyifli Oyunlar!</strong>
+      </pre>
+      <div style="margin-top:12px">
+        <button class="btn" id="rulesBack">Geri</button>
+      </div>
+    </section>
+
+    <!-- ANSWERS / CARDS -->
+    <section id="answersView" aria-hidden="true">
+      <div id="gridView" class="grid" aria-label="Kart Listesi">
+        <!-- JS ile eklenecek -->
+      </div>
+
+      <section id="qaView" class="qa" aria-hidden="true">
+        <a id="backBtn" href="#" class="btn" style="margin-bottom:12px;display:inline-block">Geri</a>
+        <h2 id="questionTitle">Soru</h2>
+        <p id="questionText">Soru metni buraya gelecek</p>
+        <h3>Cevap</h3>
+        <p id="answerText">Cevap metni buraya gelecek</p>
+      </section>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; Coğrafi Keşifler Türkiye — Halil A. ÖZKAL, Emre BAŞARAN, Yusuf OLGUN
+  </footer>
+
+  <script>
+    /* ---------- QA veri kümesi (kullanıcının verdiği içerik entegre edildi) ---------- */
+    const qaData = Array.from({length:99}, (_, i) => {
+      const id = i + 1;
+  if(id === 1) return { id, q: "Türkiye’nin en yüksek dağı hangi dağdır?", a: " Ağrı Dağı – Türkiye’nin en yüksek dağı olup volkanik kökenlidir. Sert iklimi ve buzul örtüsüyle dikkat çeker." };
+  if(id === 2) return { id, q: "Türkiye'nin en büyük gölü hangi göldür?", a: "Van Gölü – Türkiye’nin en büyük gölüdür; sodalı ve tuzlu özellik gösterir. Çevresi kapalı havza niteliğindedir" };
+  if(id === 3) return { id, q: "Türkiye’nin en uzun akarsuyu (tamamı Türkiye’de olan) hangisidir?", a: " Kızılırmak – Türkiye’nin en uzun akarsuyudur. İç Anadolu’dan doğup Karadeniz’e dökülür" };
+  if(id === 4) return { id, q: "Türkiye’de kıyıların en girintili çıkıntılı olduğu bölge hangisidir?", a: "Ege Bölgesi – Enine kıyı tipi ve graben yapılarıyla belirgindir. Tarım ve nüfus yoğunluğu fazladır" };
+  if(id === 5) return { id, q: "Türkiye’nin en geniş deltası hangi deltadır?", a: "Çukurova Deltası – Seyhan ve Ceyhan’ın biriktirmesiyle oluşmuş geniş bir deltadır.Verimli tarım topraklarına sahiptir" };
+  if(id === 6) return { id, q: "Türkiye’de volkanik arazinin en geniş yer kapladığı bölge hangisidir?", a: "Doğu Anadolu – Yükseltinin en fazla olduğu bölgemizdir. Sert karasal iklim hâkimdir" };
+  if(id === 7) return { id, q: "Türkiye’de karstik arazinin en yaygın olduğu bölge hangisidir?", a: "Akdeniz Bölgesi – Sıcak yazlar ve ılıman kışlarla tipik Akdeniz iklimi görülür. Kıyılar girintili çıkıntılıdır." };
+  if(id === 8) return { id, q: "Türkiye’de dağların kıyıya paralel uzandığı iki bölge hangileridir?", a: "Karadeniz ve Akdeniz bölgeleri – Türkiye’nin en fazla yağış alan kıyı kuşaklarıdır. Dağların kıyıya paralel uzanması iklimi şekillendirir." };
+  if(id === 9) return { id, q: "Türkiye’de yazların en sıcak olduğu bölge hangisidir?", a: "Güneydoğu Anadolu – Sıcak ve kurak iklimiyle bilinir. Tarımda sulama projeleri önemlidir." };
+  if(id === 10) return { id, q: "Türkiye’de kışların en soğuk geçtiği bölge hangisidir?", a: "Doğu Anadolu – Yüksek platolar ve dağlar bölgenin temel yapısını oluşturur. Deprem riski yüksektir" };
+  if(id === 11) return { id, q: "Türkiye’de buzul şekillerinin en yaygın bulunduğu dağlık bölge hangisidir?", a: "Doğu Anadolu Dağları – Genç ve yüksek sıradağlardır. Sert iklim ve buzul şekilleri görülür." };
+  if(id === 12) return { id, q: "Türkiye’de en fazla yağış alan coğrafi bölge hangisidir?", a: "Doğu Karadeniz – Türkiye’nin en engebeli ve en çok yağış alan yöresidir. Fındık ve çay tarımı yaygındır" };
+  if(id === 13) return { id, q: " Türkiye’de en az yağış alan doğal alan hangisidir?", a: "Tuz Gölü çevresi – Kuraklığın yüksek olduğu kapalı havza alanıdır. Tuz üretimi önemlidir." };
+  if(id === 14) return { id, q: "Türkiye’de maki bitki örtüsünün görüldüğü iklim tipi hangisidir?", a: "Akdeniz iklimi – Yazları sıcak ve kurak, kışları ılık ve yağışlıdır. Bitki örtüsü makidir" };
+  if(id === 15) return { id, q: " Türkiye’de falez kıyılarının en fazla görüldüğü bölge hangisidir?", a: "Karadeniz Bölgesi – Her mevsim yağış alan nemli bir bölgedir. Dağlar kıyıya paralel uzanır." };
+  if(id === 16) return { id, q: "Türkiye’de graben ovalarının en yaygın olduğu bölge hangisidir?", a: "Ege Bölgesi – Graben ve horst sistemleri nedeniyle enine kıyı tipi görülür. Ekonomisi tarım ve turizme dayanır" };
+  if(id === 17) return { id, q: " Türkiye’de en geniş plato alanları hangi bölgededir?", a: "İç Anadolu Bölgesi – Karasal iklimli geniş platolardan oluşur. Tuz Gölü ve kapalı havzalar bulunur" };
+  if(id === 18) return { id, q: " Türkiye’nin en büyük yer altı tuz rezervleri hangi göl çevresindedir?", a: "Tuz Gölü çevresi – Buharlaşmanın yüksek olduğu tuzlu bir kapalı havza alanıdır. Yağış çok azdır." };
+  if(id === 19) return { id, q: "Türkiye’nin en derin gölü hangisidir?", a: "Van Gölü – Volkanik set yapısıyla oluşmuş büyük bir kapalı havza gölüdür. Sodalı suyu ile bilinir" };
+  if(id === 20) return { id, q: " Türkiye’de en büyük delta ovalarının bulunduğu bölge hangisidir?", a: "Akdeniz Bölgesi – Kıyı kuşağı tarımda çok verimlidir. Turizm faaliyetleri oldukça gelişmiştir." };
+  if(id === 21) return { id, q: " Türkiye’de step bitki örtüsünün en yaygın olduğu bölge hangisidir?", a: " İç Anadolu – Bitki örtüsü bozkırdır. Kışları soğuk, yazları sıcak ve kurak geçer" };
+  if(id === 22) return { id, q: " Türkiye’de bozkır ikliminin yaygın olmasının en temel nedeni nedir?", a: "Karasal iklim – Sıcaklık farklarının yüksek olduğu iklimdir. Yaz kuraklığı ve kış soğukları belirgindir." };
+  if(id === 23) return { id, q: "Türkiye’de erozyonun en şiddetli görüldüğü coğrafi bölge hangisidir?", a: "İç Anadolu ve Doğu Anadolu – Karasal iklimin etkili olduğu yüksek alanlardır. Kışlar sert geçer." };
+  if(id === 24) return { id, q: " Türkiye’nin en geniş karstik ovası hangi ovadır?", a: " Konya Ovası – Türkiye’nin en geniş ovasıdır. Kapalı havza niteliğindedir" };
+  if(id === 25) return { id, q: " Türkiye’nin en büyük yapay gölü hangi barajla oluşmuştur?", a: "Atatürk Barajı – Fırat Nehri üzerinde kurulmuş büyük hidroelektrik barajıdır. Sulamada da önemlidir." };
+  if(id === 26) return { id, q: "Türkiye’de volkan konilerinin en fazla bulunduğu bölge hangisidir?", a: " İç Anadolu – Tarım alanlarının büyük kısmı tahıl ekimine ayrılmıştır. Yerleşme seyrektir" };
+  if(id === 27) return { id, q: " Türkiye’de en fazla barajın bulunduğu akarsu havzası hangisidir?", a: "Fırat Havzası – Türkiye’nin en büyük akarsu havzalarından biridir. Baraj ve sulama potansiyeli yüksektir" };
+  if(id === 28) return { id, q: "Türkiye’de en uzun kıyı hangi denize aittir?", a: "Akdeniz – Ilıman deniz etkisinin görüldüğü kıyı kuşağıdır. Tarım, turizm ve limanlar yoğundur" };
+  if(id === 29) return { id, q: "Türkiye’de tektonik ovaların en sık görüldüğü bölge hangisidir?", a: "İç Anadolu – Step alanlarının geniş yer kapladığı bölgedir. Yükselti fazla değildir" };
+  if(id === 30) return { id, q: " Türkiye’de en fazla heyelanın görüldüğü bölge hangisidir?", a: "Karadeniz Bölgesi – Yağış fazlalığı nedeniyle ormanların yoğun olduğu bölgedir" };
+  if(id === 31) return { id, q: " Türkiye’de Ege kıyılarının enine uzanmasının nedeni nedir?", a: "Kırıklı yapı – Tektonik hareketlerle oluşan kırık hatlarını ifade eder. Deprem riski yüksektir" };
+  if(id === 32) return { id, q: " Karadeniz kıyılarında kıyı ovalarının dar olmasının nedeni nedir?", a: "Kırıklı yapı – Tektonik hareketlerle oluşan kırık hatlarını ifade eder. Deprem riski yüksektir" };
+  if(id === 33) return { id, q: "Türkiye’de deltalı kıyıların en gelişmiş olduğu bölge hangisidir?", a: "Akdeniz Bölgesi – Yüksek engebeli alanlara ve dar kıyı ovalarına sahiptir" };
+  if(id === 34) return { id, q: "Türkiye’de mendereslerin en sık görüldüğü bölge hangisidir?", a: "Ege Bölgesi – Fay hatları ve graben sistemleriyle karakterizedir. Deprem riski yüksektir" };
+  if(id === 35) return { id, q: "Türkiye’de en geniş kapalı havza hangi coğrafi sahadadır?", a: "İç Anadolu – Kapalı havzaların ve platoların bulunduğu geniş karasal bölgedir" };
+  if(id === 36) return { id, q: "Van Gölü’nün sodalı olmasının sebebi nedir?", a: "Volkanik yapı – Lav ve piroklastik malzemelerin oluşturduğu jeolojik yapıdır. Ağrı, Erciyes gibi dağlarda görülür." };
+  if(id === 37) return { id, q: "Türkiye’de şelf alanın en geniş olduğu deniz hangisidir?", a: "Karadeniz – Yıl boyu yağışlı ve nemli kıyı kuşağıdır. Kıyıda falezler yaygındır" };
+  if(id === 38) return { id, q: " Türkiye’de akarsu rejimlerinin düzensiz olmasının temel nedeni nedir?", a: "Yağış rejiminin düzensizliği – Yağışların yıl içinde eşitsiz dağıldığını gösterir. Akdeniz ikliminde belirgindir." };
+  if(id === 39) return { id, q: "İç kesimlerde tuzlu–alkalili toprakların oluşmasının nedeni nedir?", a: "Buharlaşma fazlalığı – Sıcak ve kurak alanlarda su kaybının yüksek olmasıdır. Tuzlanmaya yol açabilir" };
+  if(id === 40) return { id, q: "Türkiye’de karstik kaynaklara verilen genel ad nedir?", a: "Voklüz – Kireçtaşı bölgelerinde görülen güçlü karstik kaynak tipidir. Ani ve bol su çıkarır" };
+  if(id === 41) return { id, q: "Pamukkale travertenlerinin oluşmasını sağlayan süreç nedir?", a: "Kimyasal çökelme – Minerallerin çözünmeden sonra yeniden çökmesiyle oluşan süreçtir. Karstik alanlarda yaygındır" };
+  if(id === 42) return { id, q: " Türkiye’de fiyord ve resif kıyılarının görülmemesinin nedeni nedir?", a: "Buzul ve mercan koşullarının olmayışı – Türkiye’nin iklimi bu oluşumlara uygun olmadığı için yaygın değildir." };
+  if(id === 43) return { id, q: "Buzul göllerinin en fazla bulunduğu dağ sistemi hangisidir?", a: "Doğu Anadolu Dağları – Türkiye’nin en yüksek uzun dağ sıralarıdır. Genç tektonik hareketlerle şekillenmiştir" };
+  if(id === 44) return { id, q: "Türkiye’de falez oluşumunun nedeni nedir?", a: "Dalga aşındırması – Kıyılarda falez ve aşınım şekillerinin oluşumuna neden olur." };
+  if(id === 45) return { id, q: "Türkiye’de orografik yağışların en fazla görüldüğü bölge hangisidir?", a: "Karadeniz – Falezli kıyıları ve sürekli yağışlı yapısıyla bilinir." };
+  if(id === 46) return { id, q: "Çöküntü ovalarının oluşum nedeni hangi tektonik harekettir?", a: "Çökme (grabenleşme) – Yer kabuğunun belirli bloklarının aşağıya çökmesiyle oluşur. Ege Bölgesi’nde yaygındır" };
+  if(id === 47) return { id, q: "Türkiye’de deprem riskinin en yüksek olduğu iki fay hattı hangileridir?", a: "Kuzey Anadolu Fayı ve Doğu Anadolu Fayı – Türkiye’nin en önemli aktif fay zonlarıdır. Büyük depremlere neden olur" };
+  if(id === 48) return { id, q: "Türkiye’de volkanik set göllerinin en fazla bulunduğu bölge hangisidir?", a: " Doğu Anadolu – Genç ve kırıklı yapısı nedeniyle deprem riski yüksektir" };
+  if(id === 49) return { id, q: " Türkiye’de alüvyal toprakların en geniş bulunduğu bölge hangisidir?", a: "Akdeniz Bölgesi – Turizmin, tarımın ve liman ticaretinin yoğun olduğu bölgedir" };
+  if(id === 50) return { id, q: "Türkiye’de gerçek nemliliğin en yüksek olduğu bölge hangisidir?", a: "Karadeniz – Nemli iklimi ve sık ormanlarıyla tanınır." };
+  if(id === 51) return { id, q: " Türkiye’de karstik mağaraların en fazla görüldüğü bölge hangisidir?", a: " Akdeniz Bölgesi – Tarımda seracılık ve turunçgil üretimi yoğundur." };
+  if(id === 52) return { id, q: "Türkiye’nin en büyük akarsu havzası hangisidir?", a: "Fırat-Dicle Havzası – Mezopotamya’yı oluşturan su kaynaklarıdır. Türkiye’nin güneydoğusunda yer alır" };
+  if(id === 53) return { id, q: "Türkiye’de kapalı havza oluşumunun nedeni nedir?", a: "Tektonik çanaklar – Kırılma veya çökmeyle oluşan kapalı çanaklardır. Göller için zemin oluşturabilir." };
+  if(id === 54) return { id, q: "Ege Bölgesi’nde graben oluşumuna neden olan fay türü nedir?", a: "Normal fay – Gerilme kuvvetlerinin etkisiyle oluşan fay türüdür. Ege Bölgesi’nde yaygındır" };
+  if(id === 55) return { id, q: "Türkiye’de akarsuların taşıma güçlerinin yüksek olmasının nedeni nedir?", a: "Eğim fazlalığı – Arazinin dik yapısını ifade eder; akarsuların hızlı akmasına neden olur." };
+  if(id === 56) return { id, q: "Türkiye’nin en zengin hidroelektrik potansiyeli hangi bölgede bulunur?", a: " Doğu Anadolu – Yüksekliğin ve engebenin en fazla olduğu bölgemizdir" };
+  if(id === 57) return { id, q: "Türkiye’de don olaylarının en uzun sürdüğü bölge hangisidir?", a: " Doğu Anadolu – Sert karasal iklim ve uzun kış süresi görülür" };
+  if(id === 58) return { id, q: "Türkiye’de toprak oluşum hızının yavaş olmasının temel nedeni nedir?", a: "İklim sertliği – Sıcaklık farklarının fazla olduğu ve soğuk kışların yaşandığı iklim koşullarıdır." };
+  if(id === 59) return { id, q: "Türkiye’de en çok kumul alan hangi kıyı tipinde görülür?", a: "Alüvyal kıyılar – Akarsuların biriktirmesiyle oluşan düz ve verimli kıyı alanlarıdır" };
+  if(id === 60) return { id, q: " Türkiye’nin en geniş volkanik platosu hangi platodur?", a: "Erzurum-Kars Platosu – Soğuk iklimi ve yüksekliğiyle bilinen geniş plato alanıdır" };
+  if(id === 61) return { id, q: " Türkiye’de buzul vadilerinin görülmesinin sebebi nedir?", a: "Yüksek dağlık alanlar – Türkiye’nin kuzey ve doğu kesimlerinde yaygındır. Ulaşım zorlaşır" };
+  if(id === 62) return { id, q: "Türkiye’de göçmen kuş yollarının yoğun olduğu iki bölge hangileridir?", a: "Marmara ve Ege – Geçiş iklimi özellikleri görülür; nüfus ve sanayi yoğundur" };
+  if(id === 63) return { id, q: " Türkiye’de akarsuların enerji potansiyelinin fazla olmasının iki nedeni nedir?", a: "Eğimin fazla olması ve akarsu boylarının kısa olması – Akarsu aşındırmasının kuvvetli olduğunu gösterir" };
+  if(id === 64) return { id, q: "Türkiye’de kıyı ile iç kesimler arasında kısa mesafede iklim farkı oluşmasının nedeni nedir?", a: "Dağların kıyıya paralel uzanması – Kıyıda doğal liman oluşumunu sınırlar, iç kesimlere geçişi zorlaştırır" };
+  if(id === 65) return { id, q: "Türkiye’de yükseltinin batıdan doğuya artmasının temel nedeni nedir?", a: "Jeolojik yükselme – Yer kabuğunun tektonik hareketlerle yükselmesidir. Dağ oluşumunda etkili olur." };
+  if(id === 66) return { id, q: "Türkiye’de kıta sahanlığının dar olduğu bölgelerin ortak özelliği nedir?", a: "Dağların kıyıya paralel uzanması – Ege hariç tüm kıyılarda bu durum görülür ve iklim ile kıyı tipini etkiler." };
+  if(id === 67) return { id, q: "Türkiye’de jeotermal kaynakların yoğun olmasının nedeni nedir?", a: "Genç tektonik yapı – Deprem, volkanizma ve kırıkların aktif olduğu jeolojik evredir." };
+  if(id === 68) return { id, q: "İç kesimlerde karasal iklimin geniş yer tutmasının nedeni nedir?", a: "Deniz etkisinin azlığı – İç kesimlerde iklimin daha karasal olmasına neden olur" };
+  if(id === 69) return { id, q: "Türkiye’de akarsu aşındırmasının en güçlü olduğu bölge hangisidir?", a: " Doğu Karadeniz – Çok yağışlı ve engebeli bir bölgedir; heyelan riski yüksektir" };
+  if(id === 70) return { id, q: "Türkiye’de volkanik arazilerin en eski olduğu bölge hangisidir?", a: " İç Anadolu – Düşük yağış nedeniyle tarım sulamaya bağlıdır" };
+  if(id === 71) return { id, q: "Anadolu’nun oluşumunda etkili olan iki büyük levha hangileridir?", a: "Arap Levhası ve Avrasya Levhası – Türkiye bu iki levhanın sıkıştırma etkisi altındadır." };
+  if(id === 72) return { id, q: "Türkiye’de genç kıvrım dağlarının oluştuğu jeolojik zaman hangi zamandır?", a: "III. Zaman (Tersiyer) – Türkiye’nin genç arazilerinin büyük kısmının oluştuğu jeolojik dönemdir" };
+  if(id === 73) return { id, q: "Türkiye’nin bugünkü engebeli yapısının temel nedeni nedir?", a: "Genç tektonik hareketler – Yükselme, kırılma ve depremler bu dönemde yoğunlaşmıştır." };
+  if(id === 74) return { id, q: "İç Anadolu çöküntü havzalarının oluşumu hangi tektonik mekanizma ile açıklanır?", a: "Gerilme tektoniği – Yer kabuğunun açılma ve gerilme sonucu kırılmasıdır. Ege’de yaygındır" };
+  if(id === 75) return { id, q: "Türkiye’de granit gibi sert kayaçların yüzeye çıkmasının nedeni nedir?", a: "Erozyon ve aşınma – Toprağın su ve rüzgârla taşınması olayıdır. Türkiye’de yaygın bir sorundur" };
+  if(id === 76) return { id, q: "Doğu Anadolu’daki volkanizmanın temel jeodinamik nedeni nedir?", a: "Levha sıkışması – Kıvrımlı dağ oluşumlarının temel nedenidir" };
+  if(id === 77) return { id, q: "Türkiye’de kaldera oluşumuna yol açan süreç nedir?", a: "Patlayıcı volkanizma – Yoğun silisli lavların oluşturduğu şiddetli püskürmelerdir" };
+  if(id === 78) return { id, q: "Türkiye’de grabenlerin oluşumunda etkili olan gerilme yönü hangi doğrultudadır?", a: "Doğu-batı yönlü gerilme – Ege Bölgesi’nde graben sistemlerinin oluşmasına yol açar." };
+  if(id === 79) return { id, q: "Türkiye’de kırsal kesimde heyelan riskini artıran temel doğal neden nedir?", a: "Eğimin fazla olması – Akarsuların hızını artırır ve aşınımı güçlendirir" };
+  if(id === 80) return { id, q: "Tortul havzaların geniş olduğu bölgelerin ortak özelliği nedir?", a: "Çöküntü alanları olmaları – Graben ve çöküntü ovalarının bulunduğunu gösterir" };
+  if(id === 81) return { id, q: "Türkiye’de jeotermal suların tuzluluğunun nedeni nedir?", a: "Mineralli kayaçlarla temas – Suların mineralleşmesine yol açar" };
+  if(id === 82) return { id, q: "Anadolu’daki göllerin çoğunun tektonik kökenli olmasının nedeni nedir?", a: "Genç tektonik yapı – Aktif faylar ve deprem riski yüksektir." };
+  if(id === 83) return { id, q: "Türkiye’de dağların güney yamaçlarında karstlaşmanın daha fazla olmasının nedeni nedir?", a: "Nem ve sıcaklık farkı – Bitki örtüsünü ve toprak yapısını etkileyen temel iklim unsurlarıdır." };
+  if(id === 84) return { id, q: "Türkiye’nin üç tarafının denizlerle çevrili olmasına rağmen iklim çeşitliliğinin yüksek olmasının iki nedeni nedir?", a: "Yükselti farkı ve dağların uzanışı – İklim farklılıklarının ve yağış dağılışının temel nedenlerindendir." };
+  if(id === 85) return { id, q: "İç kesimlerde geniş tuz çökellerinin bulunmasının jeolojik nedeni nedir?", a: "Buharlaşmanın yüksek olması – Sıcak bölgelerde su kıtlığına yol açar" };
+  if(id === 86) return { id, q: "Türkiye’de sıcak su kaynaklarının deprem bölgeleri ile örtüşmesinin nedeni nedir?", a: "Fay hatları boyunca oluşum – Deprem ve jeotermal kaynaklarla ilişkilidir" };
+  if(id === 87) return { id, q: "Türkiye’de dağların kıyıya paralel uzandığı bölgelerde ulaşımın zor olmasının fiziki nedeni nedir?", a: "Dağların kıyıya paralel uzanması – Kıyı ovalarını daraltır, ulaşımı zorlaştırır" };
+  if(id === 88) return { id, q: "Türkiye’de grabenlerin verimli tarım alanları oluşturmasının nedeni nedir?", a: "Alüvyal birikim – Akarsuların taşıdığı malzemeyi biriktirmesiyle oluşur." };
+  if(id === 89) return { id, q: "Türkiye’de tektonik yükselme sürecinin devam ettiğini gösteren iki kanıt nedir?", a: "Süren depremler ve yükselen kıyılar – Tektonik gençliğe işaret eder" };
+  if(id === 90) return { id, q: "Türkiye'de kırgıbayır oluşumunun en temel nedeni nedir?", a: "Şiddetli erozyon – Toprak kaybının yoğun olduğu bölgelere özgüdür" };
+  if(id === 91) return { id, q: "Türkiye’de yüksek dağlarda sirk gölü oluşumunun nedeni nedir?", a: "Buzul aşındırması – Yüksek dağlarda vadi ve sirk şekilleri oluşturur" };
+  if(id === 92) return { id, q: "Türkiye’de kıyı çizgisinin en fazla değişime uğradığı ortam hangisidir?", a: "Alüvyal kıyılar – Deltalar ve birikim ovaları bu tipte oluşur" };
+  if(id === 93) return { id, q: "Türkiye’de akarsu ağı sık olmasının nedeni nedir?", a: "Engebeli yapı – Ulaşımın zor olduğu dağlık alanları ifade eder" };
+  if(id === 94) return { id, q: "Türkiye’de delta oluşumunu engelleyen modern süreç nedir?", a: " Barajlar – Enerji, sulama ve taşkın kontrolü için yapılan büyük su yapılarıdır." };
+  if(id === 95) return { id, q: "Türkiye’de sıcaklık farklarının yüksek olmasının temel nedeni nedir?", a: "Karasal iklim – Yaz-kış sıcaklık farkının büyük olduğu iklimdir." };
+  if(id === 96) return { id, q: "Türkiye’de dağların yüksek kesimlerinde çığ riskinin temel iki nedeni nedir?", a: " Eğimin fazla olması ve kar birikimi – Sel ve çığ riskini artırır." };
+  if(id === 97) return { id, q: "Türkiye’de iç kesimlerde step bitki örtüsünün baskın olmasının iklimsel nedeni nedir?", a: "Yağış azlığı – Kurak iklim koşullarını ve step bitki örtüsünü oluşturur." };
+  if(id === 98) return { id, q: "Türkiye’de göllerin çoğunun dışa akışının olmamasının nedeni nedir?", a: "Kapalı havza yapısı – Suların dışarıya akmadığı, göllerin oluştuğu alanlardır" };
+  if(id === 99) return { id, q: "Türkiye’de kıyı kumullarının oluşması için gerekli iki doğal koşul nedir?", a: "Rüzgâr ve gevşek kum birikimi – Kumulların ve rüzgâr aşınım şekillerinin oluşmasına yol açar." };
+  if(id === 100) return { id, q: "Türkiye’nin jeolojik çeşitliliğinin çok yüksek olmasının temel nedeni nedir?", a: "Farklı jeolojik dönemlerde oluşmuş yapıların bulunması – Türkiye’nin jeolojik çeşitliliğini gösterir." };
+      return { id, q: "", a: "" };
+    });
+
+    /* ---------- Görüntü kontrolü: Home / Rules / Answers ---------- */
+    const homeView = document.getElementById('homeView');
+    const rulesView = document.getElementById('rulesView');
+    const answersView = document.getElementById('answersView');
+    const qaView = document.getElementById('qaView');
+
+    function showHome(){
+      homeView.style.display = 'flex';
+      rulesView.style.display = 'none';
+      answersView.style.display = 'none';
+      qaView.style.display = 'none';
+      rulesView.setAttribute('aria-hidden','true');
+      answersView.setAttribute('aria-hidden','true');
+      qaView.setAttribute('aria-hidden','true');
+    }
+    function showRules(){
+      homeView.style.display = 'none';
+      rulesView.style.display = 'block';
+      answersView.style.display = 'none';
+      qaView.style.display = 'none';
+      rulesView.setAttribute('aria-hidden','false');
+      answersView.setAttribute('aria-hidden','true');
+      qaView.setAttribute('aria-hidden','true');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    function showAnswers(){
+      homeView.style.display = 'none';
+      rulesView.style.display = 'none';
+      answersView.style.display = 'block';
+      qaView.style.display = 'none';
+      rulesView.setAttribute('aria-hidden','true');
+      answersView.setAttribute('aria-hidden','false');
+      qaView.setAttribute('aria-hidden','true');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    // Nav butonlar
+    document.getElementById('navHome').addEventListener('click', showHome);
+    document.getElementById('navRules').addEventListener('click', showRules);
+    document.getElementById('navAnswers').addEventListener('click', showAnswers);
+    document.getElementById('homeRulesBtn').addEventListener('click', showRules);
+    document.getElementById('homeAnswersBtn').addEventListener('click', showAnswers);
+    document.getElementById('rulesBack').addEventListener('click', showHome);
+
+    /* ---------- Kartlar + QA gösterimi (aynı mantıkla) ---------- */
+    const grid = document.getElementById('gridView');
+    const questionTitle = document.getElementById('questionTitle');
+    const questionText = document.getElementById('questionText');
+    const answerText = document.getElementById('answerText');
+    const backBtn = document.getElementById('backBtn');
+
+    function renderGrid(){
+      grid.innerHTML = '';
+      qaData.forEach(item=>{
+        const card = document.createElement('button');
+        card.className = 'card';
+        card.type = 'button';
+        card.setAttribute('aria-label', `Kart ${item.id}`);
+        card.textContent = item.id;
+        card.addEventListener('click', ()=>{
+          showQA(item.id);
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    function showQA(id){
+      const item = qaData.find(x=>x.id===id);
+      if(!item) return showGrid();
+      questionTitle.textContent = `Soru ${item.id}`;
+      questionText.textContent = item.q || "Soru eklenmemiş.";
+      answerText.textContent = item.a || "Cevap eklenmemiş.";
+      // göster
+      answersView.querySelector('#gridView').style.display = 'none';
+      qaView.style.display = 'block';
+      qaView.setAttribute('aria-hidden','false');
+      qaView.scrollIntoView({behavior:'smooth'});
+    }
+
+    function showGrid(){
+      qaView.style.display = 'none';
+      qaView.setAttribute('aria-hidden','true');
+      answersView.querySelector('#gridView').style.display = 'grid';
+      window.location.hash = '';
+    }
+
+    backBtn.addEventListener('click',(e)=>{e.preventDefault(); showGrid();});
+
+    // initial render
+    renderGrid();
+    showHome();
+  </script>
+</body>
+</html>
